@@ -4,8 +4,9 @@ import { Inter } from '@next/font/google'
 import styles from '../styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
+import Link from 'next/link'
 
-export default function Home() {
+export default function Home({ data }) {
   return (
     <>
       <Head>
@@ -18,42 +19,35 @@ export default function Home() {
       <header>
         <nav>
           <img />
-          <a href='/'>Home</a>
-          <a href='/events'>Events</a>
-          <a href='/AboutUs'>About Us</a>
+          <Link href='/' legacyBehavior>
+            <a>Home</a>
+          </Link>
 
+          <Link href='/events' legacyBehavior>
+            <a>Events</a>
+          </Link>
+
+          <Link href='/AboutUs' legacyBehavior>
+            <a>About Us</a>
+          </Link>
         </nav>
       </header>
 
 
       <main className={styles.main}>
-        <a href=''>
-          <img />
-          <h2>Events in London</h2>
-          <p>
-            Lorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-          </p>
-        </a>
 
-
-        <a href=''>
-          <img />
-          <h2>Events in JoRadan</h2>
-          <p>
-            Lorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-          </p>
-        </a>
-
-
-
-        <a href=''>
-          <img />
-          <h2>Events in Qatar</h2>
-          <p>
-            Lorem ipsum Lorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsumLorem ipsum
-          </p>
-        </a>
-
+        {data.map((ev, i) => (
+          <Link href={`/events/${ev.id}`} key={i} legacyBehavior>
+            <a>
+              <Image src={ev.image} alt={ev.title} width={200} height={200} />
+              <h2>{ev.title}</h2>
+              <p>
+                {ev.description}
+              </p>
+            </a>
+          </Link>
+        )
+        )}
 
 
       </main>
@@ -63,4 +57,14 @@ export default function Home() {
       </footer>
     </>
   )
+}
+export const getServerSideProps = async (ctx) => {
+  const { events_categories, allEvents } = await import('../data/data.json')
+
+
+  return {
+    props: {
+      data: events_categories
+    }
+  }
 }
