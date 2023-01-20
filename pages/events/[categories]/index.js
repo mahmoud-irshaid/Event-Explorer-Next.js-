@@ -1,36 +1,13 @@
 import Image from 'next/image';
 import React from 'react'
 import Link from 'next/link'
+import CatEvent from '../../../src/components/events/catEvent';
 function index({ data, city }) {
     return (
-        <div>
-            <h1>Events in {city}</h1>
-
-
-
-            {data.map(ev => (
-                <div key={ev.id}>
-                    <Link href={`/events/${city}/${ev.id}`} legacyBehavior>
-                        <a>
-                            <Image src={ev.image} alt={ev.title} width={200} height={200} />
-                            <h2>{ev.title}</h2>
-                            <p>
-                                {ev.description}
-                            </p>
-                        </a>
-                    </Link>
-                </div>
-            ))
-            }
-
-
-        </div >
+        <CatEvent data={data} city={city} />
     )
 }
-
 export default index
-
-
 
 
 export const getStaticProps = async (ctx) => {

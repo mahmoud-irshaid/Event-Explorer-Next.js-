@@ -1,17 +1,10 @@
 import Image from 'next/image'
 import React from 'react'
+import EventCard from '../../../src/components/events/eventCard'
 
 function Page({ data }) {
     return (
-        <div>
-
-            <h1>Our single Event</h1>
-            <Image src={data.image} alt={data.title} width={200} height={200} />
-            <h2>{data.title}</h2>
-            <p>
-                {data.description}
-            </p>
-        </div>
+        <EventCard data={data} />
     )
 }
 

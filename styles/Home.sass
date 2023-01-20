@@ -1,0 +1,104 @@
+header
+    height: 250px
+    background: linear-gradient(305deg,#dbfff3,transparent)
+    >div
+        width: 100%
+        margin: auto
+        display: flex
+        flex-direction: column
+        justify-content: space-between
+        padding: 1% 5%
+        gap: 50px
+    h1
+        width: 50%
+        font-size: 40px
+        text-transform: uppercase
+    .topNav
+        display: flex
+        justify-content: space-between
+        align-content: center
+    ul
+        display: flex
+        text-decoration: none
+        list-style: none
+        gap: 15px
+    li
+        font-weight: 600
+        font-size: 16px
+
+footer
+    width: 100%
+    background-color: #333
+    color: #fff
+    padding: 15px
+    text-align: center
+
+main
+    width: 100%
+    max-width: 1450px
+    min-height: 550px
+    margin: auto
+    padding: 80px 30px
+
+.home-body
+    display: flex
+    flex-direction: column
+    gap: 50px
+    .image
+        width: 40%
+    .card
+        display: flex
+        flex-direction: row
+        gap: 30px
+        justify-content: center
+        align-content: center
+        align-items: center
+        &:nth-child(even)
+            direction: rtl
+        .content
+            width: 50%
+
+    .about_us_list
+        display: flex
+        flex-direction: column
+
+.events-page
+    display: flex
+    flex-direction: row
+    justify-content: center
+    gap: 20px
+    min-height: 500px
+    .card
+        position: relative
+        h2
+            position: absolute
+            width: 100%
+            top: 40%
+            text-align: center
+            text-transform: uppercase
+            text-shadow: 1px 1px 20px black
+            font-size: 38px
+            color: #fff
+
+.cat-event
+    width: 100%
+    .content
+        width: 100%
+        display: flex
+        flex-direction: row
+        flex-wrap: wrap
+        gap: 30px
+        justify-content: start
+    .card
+        display: flex
+        flex-direction: column
+        width: 30%
+        gap: 10px
+
+.event-card
+    width: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    gap: 10px
