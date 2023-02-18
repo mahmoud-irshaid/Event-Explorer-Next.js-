@@ -4,15 +4,18 @@ import { useRouter } from 'next/router'
 export default function EventCard({ data }) {
     const inputEmail = useRef()
     const router = useRouter()
+    const [message, setMessage] = useState('')
+
     const onSubmit = async (e) => {
         e.preventDefault()
         const emailValue = inputEmail.current.value
         const eventId = router?.query?.id
 
+        const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-        const validRegex = 
-
-        
+        if (!emailValue.match(validRegex)) {
+            setMessage('Please introduce a correct email address.')
+        }
 
 
         try {
@@ -30,6 +33,8 @@ export default function EventCard({ data }) {
             if (!res.ok)
                 throw new Error(`Error : ${res.status}`)
             const data = await res.json()
+            setMessage(data.message)
+            inputEmail.current.value = ''
             console.log(data, '????');
         } catch (e) {
             console.log(e);
@@ -50,5 +55,6 @@ export default function EventCard({ data }) {
                 <input ref={inputEmail} type='email' id='email' placeholder='please insert ur email here' />
                 <button type='submit'>Submit</button>
             </form>
+            <p>{message}</p>
         </div>)
 }

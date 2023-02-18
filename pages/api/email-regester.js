@@ -37,6 +37,11 @@ export default function handler(req, res) {
     if (method === 'POST') {
         const { email, eventId } = req.body
 
+        if (!email || !email.include('@')) {
+            res.status(422).json({ message: 'Invalid email address' })
+            return;
+        }
+
         const newAllEvents = allEvents?.map(ev => {
             if (ev?.id === eventId) {
                 if (ev?.emails_registered?.includes(email)) {
@@ -50,7 +55,7 @@ export default function handler(req, res) {
 
         fs.writeFileSync(filePath, JSON.stringify({ events_categories, allEvents: newAllEvents }))
 
-        res.status(200).json({ message: `You has been regestired successfully with the email: ${email}` })
+        res.status(200).json({ message: `You has been regestired successfully with the email: ${email} for the event ${eventId}` })
     }
 
 }
